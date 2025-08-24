@@ -7,6 +7,7 @@ export const Env = createEnv({
     CLERK_SECRET_KEY: z.string().min(1),
     DATABASE_URL: z.string().min(1),
     LOGTAIL_SOURCE_TOKEN: z.string().optional(),
+    GEMINI_API_KEY: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().optional(),
@@ -29,5 +30,6 @@ export const Env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   },
 });
