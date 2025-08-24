@@ -179,6 +179,7 @@ Developer experience first, extremely flexible code structure and only keep what
 - 🖥️ Monitoring as Code with [Checkly](https://www.checklyhq.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=next-js-boilerplate)
 - 🔐 Security and bot protection ([Arcjet](https://launch.arcjet.com/Q6eLbRE))
 - 📊 Analytics with PostHog
+- 🤖 Google Gemini API proxy with account-based rate limiting
 - 🎁 Automatic changelog generation with Semantic Release
 - 🔍 Visual regression testing
 - 💡 Absolute Imports using `@` prefix
@@ -243,6 +244,14 @@ CLERK_SECRET_KEY=your_clerk_secret_key
 
 Now you have a fully functional authentication system with Next.js, including features such as sign up, sign in, sign out, forgot password, reset password, update profile, update password, update email, delete account, and more.
 
+### Set up Gemini API
+
+To use the Gemini API, you need to create a Gemini API key at [Google AI Studio](https://aistudio.google.com/apikey). Then, add the `GEMINI_API_KEY` variable to the `.env.local` file:
+
+```shell
+GEMINI_API_KEY=your_gemini_api_key
+```
+
 ### Set up remote database
 
 The project uses DrizzleORM, a type-safe ORM that is compatible with PostgreSQL, SQLite, and MySQL databases. By default, the project is configured to seamlessly work with PostgreSQL, and you have the flexibility to choose any PostgreSQL database provider of your choice.
@@ -271,6 +280,7 @@ After defining the environment variables in your GitHub Actions, your localizati
 ├── public                          # Public assets folder
 ├── src
 │   ├── app                         # Next JS App (App Router)
+│   │   └── api                     # API routes
 │   ├── components                  # React components
 │   ├── libs                        # 3rd party libraries configuration
 │   ├── locales                     # Locales folder (i18n messages)
