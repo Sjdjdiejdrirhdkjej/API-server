@@ -12,6 +12,7 @@ const baseURL = `http://localhost:${PORT}`;
  */
 export default defineConfig<ChromaticConfig>({
   testDir: './tests',
+  globalSetup: './tests/e2e/global.setup.ts',
   // Look for files with the .spec.js or .e2e.js extension
   testMatch: '*.@(spec|e2e).?(c|m)[jt]s?(x)',
   // Timeout per test
