@@ -1,14 +1,16 @@
 import { GoogleGenAI } from '@google/genai';
-import { auth } from '@clerk/nextjs/server';
-import { eq, sql } from 'drizzle-orm';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-import { db } from '@/libs/DB';
 import { Env } from '@/libs/Env';
-import { geminiUsageSchema } from '@/models/Schema';
 
 const ai = new GoogleGenAI(Env.GEMINI_API_KEY);
 const RATE_LIMIT = 10;
+
+type GeminiUsage = {
+  requestCount: number;
+  updatedAt: string;
+};
 
 export const POST = async (request: Request) => {
   const { userId } = auth();
@@ -17,28 +19,38 @@ export const POST = async (request: Request) => {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  // Rate limiting logic
-  const usage = await db
-    .select()
-    .from(geminiUsageSchema)
-    .where(eq(geminiUsageSchema.userId, userId));
+  // Rate limiting logic using Clerk metadata
+  const user = await clerkClient.users.getUser(userId);
+  const geminiUsage = user.privateMetadata.geminiUsage as
+    | GeminiUsage
+    | undefined;
 
-  if (usage.length === 0) {
-    await db.insert(geminiUsageSchema).values({ userId, requestCount: 1 });
+  if (!geminiUsage) {
+    await clerkClient.users.updateUserMetadata(userId, {
+      privateMetadata: {
+        geminiUsage: {
+          requestCount: 1,
+          updatedAt: new Date().toISOString(),
+        },
+      },
+    });
   } else {
-    const userUsage = usage[0];
-
-    if (userUsage.requestCount >= RATE_LIMIT) {
+    if (geminiUsage.requestCount >= RATE_LIMIT) {
       return NextResponse.json(
         { error: 'Rate limit exceeded' },
         { status: 429 },
       );
     }
 
-    await db
-      .update(geminiUsageSchema)
-      .set({ requestCount: sql`${geminiUsageSchema.requestCount} + 1` })
-      .where(eq(geminiUsageSchema.userId, userId));
+    await clerkClient.users.updateUserMetadata(userId, {
+      privateMetadata: {
+        ...user.privateMetadata,
+        geminiUsage: {
+          requestCount: geminiUsage.requestCount + 1,
+          updatedAt: new Date().toISOString(),
+        },
+      },
+    });
   }
 
   const { prompt } = await request.json();
@@ -57,6 +69,24 @@ export const POST = async (request: Request) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
+
+    // If Gemini API fails, we should probably revert the request count
+    const currentUser = await clerkClient.users.getUser(userId);
+    const currentGeminiUsage = currentUser.privateMetadata.geminiUsage as
+      | GeminiUsage
+      | undefined;
+
+    if (currentGeminiUsage) {
+      await clerkClient.users.updateUserMetadata(userId, {
+        privateMetadata: {
+          ...currentUser.privateMetadata,
+          geminiUsage: {
+            ...currentGeminiUsage,
+            requestCount: currentGeminiUsage.requestCount - 1,
+          },
+        },
+      });
+    }
 
     return NextResponse.json(
       { error: 'Failed to generate content' },
