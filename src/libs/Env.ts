@@ -5,7 +5,6 @@ export const Env = createEnv({
   server: {
     ARCJET_KEY: z.string().startsWith('ajkey_').optional(),
     CLERK_SECRET_KEY: z.string().min(1),
-    DATABASE_URL: z.string().min(1),
     LOGTAIL_SOURCE_TOKEN: z.string().optional(),
     GEMINI_API_KEY: z.string().min(1),
   },
@@ -22,7 +21,6 @@ export const Env = createEnv({
   runtimeEnv: {
     ARCJET_KEY: process.env.ARCJET_KEY,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-    DATABASE_URL: process.env.DATABASE_URL,
     LOGTAIL_SOURCE_TOKEN: process.env.LOGTAIL_SOURCE_TOKEN,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
