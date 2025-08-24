@@ -22,3 +22,14 @@ export const counterSchema = pgTable('counter', {
     .notNull(),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
 });
+
+import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+
+export const geminiUsageSchema = pgTable('gemini_usage', {
+  userId: text('user_id').primaryKey(),
+  requestCount: integer('request_count').default(0),
+  updatedAt: timestamp('updated_at', { mode: 'date' })
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+});

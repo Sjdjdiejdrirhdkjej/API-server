@@ -36,6 +36,7 @@
     "@clerk/localizations": "^3.17.2",
     "@clerk/nextjs": "^6.23.2",
     "@electric-sql/pglite": "^0.3.4",
+    "@google/genai": "^1.15.0",
     "@hookform/resolvers": "^5.1.1",
     "@logtail/pino": "^0.5.5",
     "@sentry/nextjs": "^9.34.0",
@@ -55,6 +56,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
     "@chromatic-com/playwright": "^0.12.5",
+    "@clerk/testing": "^1.11.3",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/prompt-cli": "^19.8.1",
@@ -80,6 +82,7 @@
     "checkly": "^6.0.1",
     "conventional-changelog-conventionalcommits": "^9.0.0",
     "cross-env": "^7.0.3",
+    "dotenv": "^17.2.1",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.30.1",
