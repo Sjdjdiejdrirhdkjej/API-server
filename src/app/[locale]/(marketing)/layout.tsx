@@ -38,7 +38,6 @@ export default async function Layout(props: {
               </Link>
             </li>
             <li>
-            <li>
               <Link
                 href="/portfolio/"
                 className="border-none text-gray-700 hover:text-gray-900"
