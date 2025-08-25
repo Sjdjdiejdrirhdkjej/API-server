@@ -1,5 +1,5 @@
-import { GoogleGenAI } from '@google/genai';
 import { auth, clerkClient } from '@clerk/nextjs/server';
+import { GoogleGenAI } from '@google/genai';
 import { NextResponse } from 'next/server';
 
 import { Env } from '@/libs/Env';
@@ -67,7 +67,6 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json({ text });
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
 
     // If Gemini API fails, we should probably revert the request count

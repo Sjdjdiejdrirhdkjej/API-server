@@ -16,6 +16,7 @@ test.describe('Gemini API', () => {
     expect(response.ok()).toBeTruthy();
 
     const json = await response.json();
+
     expect(json).toHaveProperty('text');
   });
 
@@ -25,13 +26,12 @@ test.describe('Gemini API', () => {
     await clerk.setCookies(page.context());
 
     for (let i = 0; i < 10; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
       const response = await request.post('/api/gemini', {
         data: {
           prompt: 'hello',
         },
       });
-      // eslint-disable-next-line no-await-in-loop
+
       expect(response.ok()).toBeTruthy();
     }
 
