@@ -115,16 +115,7 @@ export default async function Index(props: IIndexProps) {
           ) and logging (Pino.js)
         </li>
         <li>🖥️ Monitoring as Code (Checkly)</li>
-        <li>
-          🔐 Security and bot protection (
-          <a
-            className="font-bold text-blue-700 hover:border-b-2 hover:border-blue-700"
-            href="https://launch.arcjet.com/Q6eLbRE"
-          >
-            Arcjet
-          </a>
-          )
-        </li>
+        <li>🔐 Security and bot protection</li>
         <li>🤖 SEO optimization (metadata, JSON-LD, Open Graph tags)</li>
         <li>⚙️ Development tools (VSCode config, bundler analyzer, changelog generation)</li>
       </ul>
