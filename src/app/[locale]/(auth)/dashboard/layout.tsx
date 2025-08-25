@@ -18,7 +18,7 @@ export default async function DashboardLayout(props: {
 
   return (
     <BaseTemplate
-      leftNav={
+      leftNav={(
         <>
           <li>
             <Link
@@ -37,8 +37,8 @@ export default async function DashboardLayout(props: {
             </Link>
           </li>
         </>
-      }
-      rightNav={
+      )}
+      rightNav={(
         <>
           <li>
             <SignOut>{t('sign_out')}</SignOut>
@@ -48,7 +48,7 @@ export default async function DashboardLayout(props: {
             <LocaleSwitcher />
           </li>
         </>
-      }
+      )}
     >
       {props.children}
     </BaseTemplate>
