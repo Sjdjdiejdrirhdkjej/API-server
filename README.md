@@ -10,7 +10,7 @@
   </a>
 </p>
 
-🚀 Boilerplate and Starter for Next.js with App Router, Tailwind CSS, and TypeScript ⚡️ Prioritizing developer experience first: Next.js, TypeScript, ESLint, Prettier, Lefthook (replacing Husky), Lint-Staged, Vitest (replacing Jest), Testing Library, Playwright, Commitlint, VSCode, Tailwind CSS, Authentication with [Clerk](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate), Database with DrizzleORM (PostgreSQL, SQLite, and MySQL), Local database with PGlite and production with [Prisma Postgres](https://www.prisma.io/?via=nextjs-boilerplate), Error Monitoring with [Sentry](https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo), Logging with Pino.js and Log Management, Monitoring as Code, Storybook, Multi-language (i18n), AI-powered code reviews with [CodeRabbit](https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025), Secure with [Arcjet](https://launch.arcjet.com/Q6eLbRE) (Bot detection, Rate limiting, Attack protection, etc.) and more.
+🚀 Boilerplate and Starter for Next.js with App Router, Tailwind CSS, and TypeScript ⚡️ Prioritizing developer experience first: Next.js, TypeScript, ESLint, Prettier, Lefthook (replacing Husky), Lint-Staged, Vitest (replacing Jest), Testing Library, Playwright, Commitlint, VSCode, Tailwind CSS, Authentication with [Clerk](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate), Database with DrizzleORM (PostgreSQL, SQLite, and MySQL), Local database with PGlite and production with [Prisma Postgres](https://www.prisma.io/?via=nextjs-boilerplate), Error Monitoring with [Sentry](https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo), Logging with Pino.js and Log Management, Monitoring as Code, Storybook, Multi-language (i18n), AI-powered code reviews with [CodeRabbit](https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025), and more.
 
 Clone this project and use it to create your own Next.js project. You can check out the live demo at [Next.js Boilerplate](https://demo.nextjs-boilerplate.com), which includes a working authentication system.
 
@@ -54,15 +54,6 @@ Clone this project and use it to create your own Next.js project. You can check 
     </td>
   </tr>
   <tr height="187px">
-    <td align="center" width="33%">
-      <a href="https://launch.arcjet.com/Q6eLbRE">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="public/assets/images/arcjet-dark.svg?raw=true">
-          <source media="(prefers-color-scheme: light)" srcset="public/assets/images/arcjet-light.svg?raw=true">
-          <img alt="Arcjet" src="public/assets/images/arcjet-light.svg?raw=true">
-        </picture>
-      </a>
-    </td>
     <td align="center" width="33%">
       <a href="https://sevalla.com/">
         <picture>
@@ -168,7 +159,7 @@ Developer experience first, extremely flexible code structure and only keep what
 - ☂️ Code coverage with [Codecov](https://about.codecov.io/codecov-free-trial/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo)
 - 📝 Logging with Pino.js and Log Management with [Better Stack](https://betterstack.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=next-js-boilerplate)
 - 🖥️ Monitoring as Code with [Checkly](https://www.checklyhq.com/?utm_source=github&utm_medium=sponsorship&utm_campaign=next-js-boilerplate)
-- 🔐 Security and bot protection ([Arcjet](https://launch.arcjet.com/Q6eLbRE))
+- 🔐 Security and bot protection
 - 📊 Analytics with PostHog
 - 🤖 Google Gemini API proxy with account-based rate limiting
 - 🎁 Automatic changelog generation with Semantic Release
@@ -407,19 +398,6 @@ To use Checkly, you must first create an account on [their website](https://www.
 
 To complete the setup, update the `checkly.config.ts` file with your own email address and production URL.
 
-### Arcjet security and bot protection
-
-The project uses [Arcjet](https://launch.arcjet.com/Q6eLbRE), a security as code product that includes several features that can be used individually or combined to provide defense in depth for your site.
-
-To set up Arcjet, [create a free account](https://launch.arcjet.com/Q6eLbRE) and get your API key. Then add it to the `ARCJET_KEY` environment variable.
-
-Arcjet is configured with two main features: bot detection and the Arcjet Shield WAF:
-
-- [Bot detection](https://docs.arcjet.com/bot-protection/concepts) is configured to allow search engines, preview link generators e.g. Slack and Twitter previews, and to allow common uptime monitoring services. All other bots, such as scrapers and AI crawlers, will be blocked. You can [configure additional bot types](https://docs.arcjet.com/bot-protection/identifying-bots) to allow or block.
-- [Arcjet Shield WAF](https://docs.arcjet.com/shield/concepts) will detect and block common attacks such as SQL injection, cross-site scripting, and other OWASP Top 10 vulnerabilities.
-
-Arcjet is configured with a central client at `src/libs/Arcjet.ts` that includes the Shield WAF rules. Additional rules are applied when Arcjet is called in `middleware.ts`.
-
 ### Useful commands
 
 #### Bundle Analyzer
@@ -500,15 +478,6 @@ See [LICENSE](LICENSE) for more information.
     </td>
   </tr>
   <tr height="187px">
-    <td align="center" width="33%">
-      <a href="https://launch.arcjet.com/Q6eLbRE">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="public/assets/images/arcjet-dark.svg?raw=true">
-          <source media="(prefers-color-scheme: light)" srcset="public/assets/images/arcjet-light.svg?raw=true">
-          <img alt="Arcjet" src="public/assets/images/arcjet-light.svg?raw=true">
-        </picture>
-      </a>
-    </td>
     <td align="center" width="33%">
       <a href="https://sevalla.com/">
         <picture>
