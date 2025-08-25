@@ -28,12 +28,12 @@
     "test:lighthouse": "run-p start lighthouse --race"
   },
   "dependencies": {
-    "@arcjet/next": "^1.0.0-beta.8",
     "@clerk/localizations": "^3.17.2",
     "@clerk/nextjs": "^6.23.2",
     "@google/genai": "^1.15.0",
     "@hookform/resolvers": "^5.1.1",
     "@t3-oss/env-nextjs": "^0.13.8",
+    "isbot": "^5.1.30",
     "js-cookie": "^3.0.5",
     "next": "^15.3.4",
     "next-intl": "^4.3.4",
