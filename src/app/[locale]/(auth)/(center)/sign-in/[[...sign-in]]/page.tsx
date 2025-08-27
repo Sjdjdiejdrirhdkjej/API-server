@@ -26,7 +26,7 @@ export default async function SignInPage(props: ISignInPageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const firstName = cookieStore.get('firstName')?.value;
 
   return (

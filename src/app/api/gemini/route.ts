@@ -1,10 +1,10 @@
-import { GoogleGenAI } from '@google/genai';
 import { auth, clerkClient } from '@clerk/nextjs/server';
+import { GoogleGenAI } from '@google/genai';
 import { NextResponse } from 'next/server';
 
 import { Env } from '@/libs/Env';
 
-const ai = new GoogleGenAI(Env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({ apiKey: Env.GEMINI_API_KEY });
 const RATE_LIMIT = 10;
 
 type GeminiUsage = {
@@ -13,20 +13,22 @@ type GeminiUsage = {
 };
 
 export const POST = async (request: Request) => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return new Response('Unauthorized', { status: 401 });
   }
 
+  const client = await clerkClient();
+
   // Rate limiting logic using Clerk metadata
-  const user = await clerkClient.users.getUser(userId);
+  const user = await client.users.getUser(userId);
   const geminiUsage = user.privateMetadata.geminiUsage as
     | GeminiUsage
     | undefined;
 
   if (!geminiUsage) {
-    await clerkClient.users.updateUserMetadata(userId, {
+    await client.users.updateUserMetadata(userId, {
       privateMetadata: {
         geminiUsage: {
           requestCount: 1,
@@ -42,7 +44,7 @@ export const POST = async (request: Request) => {
       );
     }
 
-    await clerkClient.users.updateUserMetadata(userId, {
+    await client.users.updateUserMetadata(userId, {
       privateMetadata: {
         ...user.privateMetadata,
         geminiUsage: {
@@ -60,24 +62,24 @@ export const POST = async (request: Request) => {
   }
 
   try {
-    const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    const result = await ai.models.generateContent({
+      model: 'gemini-1.5-flash',
+      contents: prompt,
+    });
+    const text = result.text;
 
     return NextResponse.json({ text });
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
 
     // If Gemini API fails, we should probably revert the request count
-    const currentUser = await clerkClient.users.getUser(userId);
+    const currentUser = await client.users.getUser(userId);
     const currentGeminiUsage = currentUser.privateMetadata.geminiUsage as
       | GeminiUsage
       | undefined;
 
     if (currentGeminiUsage) {
-      await clerkClient.users.updateUserMetadata(userId, {
+      await client.users.updateUserMetadata(userId, {
         privateMetadata: {
           ...currentUser.privateMetadata,
           geminiUsage: {

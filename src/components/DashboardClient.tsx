@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
+import type { ReactNode } from 'react';
 import { useUser } from '@clerk/nextjs';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 
-import { Hello } from '@/components/Hello';
-
-export function DashboardClient() {
+export function DashboardClient({ children }: { children: ReactNode }) {
   const { user } = useUser();
 
   useEffect(() => {
@@ -15,9 +14,5 @@ export function DashboardClient() {
     }
   }, [user]);
 
-  return (
-    <div className="py-5 [&_p]:my-6">
-      <Hello />
-    </div>
-  );
+  return <div className="py-5 [&_p]:my-6">{children}</div>;
 }
