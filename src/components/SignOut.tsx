@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useClerk } from '@clerk/nextjs';
 import Cookies from 'js-cookie';

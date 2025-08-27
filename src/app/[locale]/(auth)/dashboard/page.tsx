@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { DashboardClient } from '@/components/DashboardClient';
+import { Hello } from '@/components/Hello';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -17,5 +18,9 @@ export async function generateMetadata(props: {
 }
 
 export default function Dashboard() {
-  return <DashboardClient />;
+  return (
+    <DashboardClient>
+      <Hello />
+    </DashboardClient>
+  );
 }
