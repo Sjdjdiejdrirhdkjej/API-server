@@ -215,6 +215,39 @@ npm run dev
 
 Open http://localhost:3000 with your favorite browser to see your project. For your information, the project is already pre-configured with a local database using PGlite. No extra setup is required to run the project locally.
 
+### Environment Variables
+
+Before you can run the application in a production environment, or to use all its features, you will need to set the following environment variables. You can copy the `.env.production` file to `.env.local` and fill in the values.
+
+#### **Required Environment Variables**
+
+These are essential for the application's core features to work.
+
+- `NODE_ENV`: Set to `production` for production builds.
+- `CLERK_SECRET_KEY`: Your secret key from Clerk for server-side authentication.
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Your publishable key from Clerk for client-side authentication.
+- `GEMINI_API_KEY`: Your API key for the Google Gemini service.
+- `DATABASE_URL`: The connection string for your production PostgreSQL database.
+
+#### **Optional but Recommended Environment Variables**
+
+These variables enable additional features or are considered best practices for production.
+
+- `NEXT_PUBLIC_APP_URL`: The public URL of your application (e.g., `https://yourapp.com`).
+- `ARCJET_KEY`: Your key from Arcjet for security and bot protection.
+
+#### **CI/CD and Service Integration Variables**
+
+These variables are for integrating with external services, primarily within a CI/CD environment.
+
+- `CROWDIN_PROJECT_ID`: For managing translations with Crowdin.
+- `CROWDIN_PERSONAL_TOKEN`: Access token for the Crowdin API.
+- `CODECOV_TOKEN`: For uploading code coverage reports to Codecov.
+- `LOGTAIL_SOURCE_TOKEN`: For shipping logs to Better Stack.
+- `CHECKLY_API_KEY`: For running monitoring-as-code checks with Checkly.
+- `CHECKLY_ACCOUNT_ID`: Account ID for Checkly.
+- `SENTRY_DSN`: Your Sentry DSN for error monitoring.
+
 ### Set up authentication
 
 To get started, you will need to create a Clerk account at [Clerk.com](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate) and create a new application in the Clerk Dashboard. Once you have done that, copy the `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` values and add them to the `.env.local` file (not tracked by Git):
